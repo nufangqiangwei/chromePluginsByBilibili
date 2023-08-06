@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "bilibili motion page",
+  "description": "b站动态页修改",
+  "version": "1.1",
+  "icons": {
+    "128": "bilibili.svg"
+  },
+  "permissions": [
+    "tabs",
+    "scripting"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';",
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+  },
+  "content_scripts":  [
+    {
+      "js": ["content-script.js"],
+      "matches": [
+        "https://t.bilibili.com/*"
+      ]
+    }
+  ],
+  "host_permissions": [
+    "https://api.bilibili.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "injected.js",
+        "videoLi.css"
+      ],
+      "matches": [
+        "https://t.bilibili.com/*"
+      ]
+    }]
+
+}
