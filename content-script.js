@@ -1,17 +1,15 @@
-vueTemplateHtml = `<div class="video-grid" id="plugin-video-list" v-scope>
-        <div class="video-card" v-for="videoInfo  in store.videoList">
-            <div class="video-thumbnail">
-                <img :src="videoInfo.modules.module_dynamic.major.archive.cover" alt="videoInfo" @click="clickTo(videoInfo.modules.module_dynamic.major.archive.jump_url)"/>
-            </div>
-            <div class="video-details">
-                <div class="video-upper" @click="clickTo(videoInfo.modules.module_author.jump_url)">{{ videoInfo.modules.module_author.name }}</div>
-                <div class="video-info">
-                    {{ videoInfo.modules.module_dynamic.major.archive.desc }}
-                </div>
-            </div>
-            <span class="video-title" @click="clickTo(videoInfo.modules.module_dynamic.major.archive.jump_url)">{{ videoInfo.modules.module_dynamic.major.archive.title }}</span>
-        </div>
-    </div>`
+vueTemplateHtml = `<div class="grid-container">
+    <div class="grid-item">
+        <img src="http://localhost/6d050af1ly1hgkmt4mrv4j21kw0sg1ky.jpg" alt="Video 1">
+        <h2>视频标题 1</h2>
+        <p>视频描述 1</p>
+    </div>
+    <div class="grid-item">
+        <img src="http://localhost/6d050af1ly1hgkmt4mrv4j21kw0sg1ky.jpg" alt="Video 2">
+        <h2>视频标题 2</h2>
+        <p>视频描述 2</p>
+    </div>
+</div>`
 cssTemplate = `.video-grid {
     display: inline-grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -18655,7 +18653,7 @@ function addCss() {
     document.getElementsByTagName('head')[0].appendChild(styleNode);
 }
 
-addCss()
+
 function injectedJS() {
     let s = document.createElement('script')
     s.src = chrome.runtime.getURL('injected.js')
