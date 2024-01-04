@@ -1,10 +1,15 @@
 function injectedJS() {
-    let s = document.createElement('script')
-    s.src = chrome.runtime.getURL('injected.js')
-    s.onload = function () {
-        this.remove();
-    };
-    (document.head || document.documentElement).appendChild(s)
+    let script = document.createElement('script')
+    script.src = chrome.runtime.getURL('indexPage.js')
+    console.log(script.src)
+    script.crossOrigin='anonymous'
+    // (document.head || document.documentElement).appendChild(script)
+    let firstChild = document.head.firstChild
+    document.head.insertBefore(script, firstChild)
+    // document.head.appendChild(script)
+    // script.remove();
 }
 
 injectedJS()
+
+

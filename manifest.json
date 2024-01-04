@@ -7,34 +7,31 @@
     "128": "bilibili.svg"
   },
   "permissions": [
-    "tabs",
-    "scripting"
+    "webRequest"
   ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';",
-    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
-  },
   "content_scripts":  [
     {
-      "css": ["videoLi.css"],
       "js": ["content-script.js"],
       "matches": [
-        "https://t.bilibili.com/*"
+        "https://*.bilibili.com/*",
       ]
     }
   ],
   "host_permissions": [
-    "https://api.bilibili.com/*"
+    "https://*.bilibili.com/*",
+    "https://bilproxy.lushen.click/*"
   ],
   "web_accessible_resources": [
     {
       "resources": [
         "injected.js",
+        "saveResponse.js",
+        "indexPage.js",
         "videoLi.css"
       ],
       "matches": [
-        "https://t.bilibili.com/*"
+        "https://*.bilibili.com/*",
+        "https://*.hdslb.com/*"
       ]
     }]
-
 }
