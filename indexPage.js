@@ -4,9 +4,11 @@ observerOptions = {
     subtree: false, // 观察后代节点，默认为 false
 }
 observer = undefined
-RecommendVideo = []
+
 const recommendVideoUrl = 'https://bilproxy.lushen.click/recommendVideo';
 const videoCardBodyClassName = "container is-version8"
+const childClassName = ['feed-card', 'bili-video-card is-rcmd', 'floor-single-card']
+const videoBid = new Set()
 var lastRequestOff = false
 function indexPage() {
     let videoCardBody = document.getElementsByClassName(videoCardBodyClassName)
@@ -50,10 +52,11 @@ function indexVideoCardAppend(mutationList, observer) {
  只取出class='feed-card'、'bili-video-card is-rcmd'、'floor-single-card'这些类的子节点。
  在这些子节点中取出视频信息，包含视频的bvid、作者名称、视频类型
  **/
-const childClassName = ['feed-card', 'bili-video-card is-rcmd', 'floor-single-card']
-const videoBid = new Set()
+
 function extractVideoCardInfo() {
+    console.log("extractVideoCardInfo")
     let videoCardBody = document.getElementsByClassName(videoCardBodyClassName)[0]
+    let RecommendVideo = []
     for (let childDom of videoCardBody.children) {
         let videoPlayUrl,videoOwnerUrl,videoOwnerName,xpathNode
         if (childClassName.includes(childDom.className)) {
@@ -87,26 +90,27 @@ function extractVideoCardInfo() {
         }
     }
     console.log(RecommendVideo)
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(RecommendVideo),
-        mode: 'no-cors'
+    if (RecommendVideo.length > 0) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(RecommendVideo),
+            mode: 'no-cors'
+        }
+        fetch(recommendVideoUrl, requestOptions)
+            .then(response => {
+                // 在这里处理后端返回的JSON数据
+                console.log(response);
+                lastRequestOff = false
+            })
+            .catch(error => {
+                // 处理请求错误
+                console.error('Error:', error);
+            })
     }
-    fetch(recommendVideoUrl, requestOptions)
-        .then(response => {
-            // 在这里处理后端返回的JSON数据
-            console.log(response);
-            RecommendVideo.splice(0)
-            lastRequestOff = false
-        })
-        .catch(error => {
-            // 处理请求错误
-            console.error('Error:', error);
-        })
 }
 
 
