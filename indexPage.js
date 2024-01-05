@@ -42,7 +42,7 @@ function indexVideoCardAppend(mutationList, observer) {
             if (childList){
                 extractVideoCardInfo()
             }
-        }, 4000)
+        }, 3000)
     }
 
 }
@@ -115,6 +115,4 @@ function extractVideoCardInfo() {
 
 
 console.log("content-script.js run")
-setTimeout(function () {
-    indexPage()
-}, 5000)
+indexPage()

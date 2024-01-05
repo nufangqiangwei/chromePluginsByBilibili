@@ -27,7 +27,9 @@
         "injected.js",
         "saveResponse.js",
         "indexPage.js",
-        "videoLi.css"
+        "videoLi.css",
+        "useDynamic.js",
+        "videoPlay.js"
       ],
       "matches": [
         "https://*.bilibili.com/*",
