@@ -22,7 +22,7 @@ function saveRecommendVideo(data) {
         console.log("Success saving data.");
     }
 }
-
+/*
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     request = JSON.parse(request)
     console.log(request)
@@ -39,3 +39,24 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         return true;  // Will respond asynchronously.
     }
 })
+*/
+let fixed_servers_config = {
+    mode: "fixed_servers",
+    rules: {
+        proxyForHttps: {
+            scheme: "https",
+            host: "api.bilibili.com"
+        }
+    }
+};
+let pac_script_config = {
+    mode: "pac_script",
+    pacScript: {
+        url: "https://raw.githubusercontent.com/rofl0r/proxy-list/master/proxy.pac"
+    }
+};
+chrome.proxy.settings.set(
+    {value: fixed_servers_config, scope: 'regular'},
+    function() {}
+);
+
