@@ -17,9 +17,13 @@
       ]
     }
   ],
+  "background": {
+    "service_worker": "ServiceWorker.js"
+  },
   "host_permissions": [
     "https://*.bilibili.com/*",
-    "https://bilproxy.lushen.click/*"
+    "https://bilproxy.lushen.click/*",
+    "http://localhost/*"
   ],
   "web_accessible_resources": [
     {
@@ -29,7 +33,8 @@
         "indexPage.js",
         "videoLi.css",
         "useDynamic.js",
-        "videoPlay.js"
+        "videoPlay.js",
+        "follow.js"
       ],
       "matches": [
         "https://*.bilibili.com/*",

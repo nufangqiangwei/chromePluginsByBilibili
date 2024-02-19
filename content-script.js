@@ -17,7 +17,15 @@ function main() {
     if (tabPath.startsWith('/video')) {
         console.log("video")
         injectedJS('videoPlay.js')
-    } else if (tabPath.startsWith('/')) {
+    }  else if (tabPath.endsWith('fans/follow')) {
+        // console.log("follow")
+        // injectedJS('follow.js')
+        (async () => {
+            const src = chrome.runtime.getURL("./follow.js");
+            const contentMain = await import(src);
+            contentMain.main();
+        })();
+    }else{
         console.log("index")
         injectedJS('indexPage.js')
     }
@@ -27,11 +35,4 @@ function main() {
 setTimeout(main, 1000)
 
 
-// 需要发送请求的地方
-chrome.runtime.sendMessage(
-    {
-        // 里面的值应该可以自定义，用于判断哪个请求之类的
-        type: 'fetch',
-        url: "url" // 需要请求的url
-    },
-    response => JSON.parse(response.text()));
+
